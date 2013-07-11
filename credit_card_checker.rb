@@ -5,7 +5,7 @@ class CreditCardChecker
     
   def type
     case 
-    when (length == 15 and prefix(2) == "34")
+    when (length == 15 and (prefix(2) == "34" or prefix(2) == "37"))
       "AMEX"
     end
   end
