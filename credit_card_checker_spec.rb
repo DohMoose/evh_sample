@@ -8,7 +8,7 @@ describe CreditCardChecker do
     end
   end
 
-  describe 'validating type' do
+  describe 'finding type' do
     it 'should find AMEX when starting with 34 and with length of 15' do
       ccc = CreditCardChecker.new '34344'
       ccc.stub(:length).and_return(15)
@@ -88,6 +88,16 @@ describe CreditCardChecker do
       ccc = CreditCardChecker.new '4408 0412 3456 7893'
       ccc.stub(:luhn_step_2).and_return(70)
       ccc.validated_with_luhn.should be_true
+    end
+  end
+
+
+  describe 'is valid' do
+    it ' when validated_with_luhn is true and type is not nil' do
+      ccc = CreditCardChecker.new '4408 0412 3456 7893'
+      ccc.should_receive(:validated_with_luhn).and_return(true)
+      ccc.should_receive(:type).and_return('VISA')
+      ccc.should be_valid
     end
   end
 end

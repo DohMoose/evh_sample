@@ -45,5 +45,8 @@ class CreditCardChecker
   end
   alias :validated_with_luhn :luhn_step_3
 
+  def valid?
+    validated_with_luhn and !type.nil?
+  end
 
 end
