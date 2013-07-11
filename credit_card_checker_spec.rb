@@ -61,9 +61,14 @@ describe CreditCardChecker do
 
 
   describe "Luhn algorithm" do
-    it "double every second digit, starting from the end" do
+    it "step 1: double every second digit, starting from the end" do
       ccc = CreditCardChecker.new '4408 0412 3456 7893'
       ccc.luhn_step_1.should eql '8408042264106148183'
+    end
+    it "step 2: add up all the digits" do
+      ccc = CreditCardChecker.new '4408 0412 3456 7893'
+      ccc.stub(:luhn_step_1).and_return('8408042264106148183')
+      ccc.luhn_step_2.should eql 70
     end
   end
   

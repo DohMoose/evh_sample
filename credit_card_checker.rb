@@ -33,4 +33,10 @@ class CreditCardChecker
     end
     doubled
   end
+
+  #Sum all doubled and untouched digits in the number. For digits greater than 9 you will need to split them and sum the independently
+  def luhn_step_2
+    #ripped from http://rosettacode.org/wiki/Sum_digits_of_an_integer#Ruby
+    luhn_step_1.split(//).inject(0) {|z, x| z + x.to_i(10)}
+  end
 end
