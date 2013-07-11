@@ -93,11 +93,34 @@ describe CreditCardChecker do
 
 
   describe 'is valid' do
-    it ' when validated_with_luhn is true and type is not nil' do
+    it 'when validated_with_luhn is true and type is not nil' do
       ccc = CreditCardChecker.new '4408 0412 3456 7893'
       ccc.should_receive(:validated_with_luhn).and_return(true)
       ccc.should_receive(:type).and_return('VISA')
       ccc.should be_valid
+    end
+  end
+
+  describe 'is not valid' do
+    it 'when validated_with_luhn is false and type is not nil' do
+      ccc = CreditCardChecker.new '4408 0412 3456 7893'
+      ccc.should_receive(:validated_with_luhn).and_return(false)
+      ccc.should_receive(:type).and_return('VISA')
+      ccc.should_not be_valid
+    end
+
+    it 'when validated_with_luhn is true and type is nil' do
+      ccc = CreditCardChecker.new '4408 0412 3456 7893'
+      ccc.stub(:validated_with_luhn).and_return(true)
+      ccc.should_receive(:type).and_return(nil)
+      ccc.should_not be_valid
+    end
+
+    it 'when validated_with_luhn is false and type is nil' do
+      ccc = CreditCardChecker.new '4408 0412 3456 7893'
+      ccc.stub(:validated_with_luhn).and_return(false)
+      ccc.should_receive(:type).and_return(nil)
+      ccc.should_not be_valid
     end
   end
 end
