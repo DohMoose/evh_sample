@@ -16,4 +16,12 @@ class CreditCardChecker
       'Visa'
     end
   end
+
+  def length
+    card.length
+  end
+
+  def prefix(characters)
+    card[0...characters]
+  end
 end
