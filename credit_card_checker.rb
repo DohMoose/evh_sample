@@ -11,7 +11,7 @@ class CreditCardChecker
       'Discover'
     when (length == 16 and ['51','52','53'].include?(prefix(2)))
       'MasterCard'
-    when ((length == 16) and prefix(1) == '4')
+    when ((length == 13 or length == 16) and prefix(1) == '4')
       'Visa'
     end
   end

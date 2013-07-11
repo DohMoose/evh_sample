@@ -42,5 +42,14 @@ describe CreditCardChecker do
       ccc.type.should eql 'Visa'
     end
 
+    it 'should find Visa when starting with 4 and with length of 13' do
+      ccc = CreditCardChecker.new '533434'
+      ccc.stub(:length).and_return(13)
+      ccc.stub(:prefix).with(4).and_return('324')
+      ccc.stub(:prefix).with(2).and_return('32')
+      ccc.should_receive(:prefix).with(1).and_return('4')
+      ccc.type.should eql 'Visa'
+    end
+
   end
 end
