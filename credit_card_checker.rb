@@ -1,5 +1,13 @@
 class CreditCardChecker
   attr_accessor :card
+
+  def self.check_cards(list_of_cards)
+    list_of_cards.lines.map do |number|
+      card = CreditCardChecker.new(number)
+      card.to_s
+    end.join("\n")
+  end
+
   def initialize(card)
     @card = card.gsub(/\s+/, "")
   end
@@ -13,7 +21,7 @@ class CreditCardChecker
     when (length == 16 and ['51','52','53'].include?(prefix(2)))
       'MasterCard'
     when ((length == 13 or length == 16) and prefix(1) == '4')
-      'Visa'
+      'VISA'
     end
   end
 
