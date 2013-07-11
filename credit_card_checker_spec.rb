@@ -77,6 +77,11 @@ describe CreditCardChecker do
       ccc.stub(:luhn_step_2).and_return(70)
       ccc.luhn_step_3.should be_true
     end
+
+    it "aliases luhn_step_3 as validated_with_luhn" do
+      ccc = CreditCardChecker.new '4408 0412 3456 7893'
+      ccc.stub(:luhn_step_2).and_return(70)
+      ccc.validated_with_luhn.should be_true
+    end
   end
-  
 end

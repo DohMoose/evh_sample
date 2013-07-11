@@ -43,4 +43,7 @@ class CreditCardChecker
   def luhn_step_3
     (luhn_step_2) % 10 == 0
   end
+  alias :validated_with_luhn :luhn_step_3
+
+
 end
