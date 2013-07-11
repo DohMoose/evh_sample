@@ -24,4 +24,13 @@ class CreditCardChecker
   def prefix(characters)
     card[0...characters]
   end
+
+  #Starting with the next to last digit and continuing with every other digit going back to the beginning of the card, double the digit
+  def luhn_step_1
+    doubled = ''
+    card.chars.reverse.each_with_index do |digit, index|
+      doubled = (index.odd? ? (digit.to_i * 2).to_s : digit) + doubled
+    end
+    doubled
+  end
 end
