@@ -131,5 +131,12 @@ describe CreditCardChecker do
       ccc.stub(:validated_with_luhn).and_return(true)
       ccc.to_s.should eql 'VISA: 4111111111111111       (valid)'
     end
+
+    it 'should output "MasterCard: 5105105105105106 (invalid)" for "5105 1051 0510 5106"' do
+      ccc = CreditCardChecker.new '5105 1051 0510 5106'
+      ccc.stub(:type).and_return('MasterCard')
+      ccc.stub(:validated_with_luhn).and_return(false)
+      ccc.to_s.should eql 'MasterCard: 5105105105105106 (invalid)'
+    end
   end
 end
