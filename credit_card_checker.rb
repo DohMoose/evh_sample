@@ -48,5 +48,10 @@ class CreditCardChecker
   def valid?
     !type.nil? and validated_with_luhn
   end
-
+  
+  def to_s
+    type_and_card = "#{type||'Unknown'}: #{card}".ljust(29, ' ')
+    valid_string = valid? ? 'valid' : 'invalid'
+    "#{type_and_card}(#{valid_string})"
+  end
 end

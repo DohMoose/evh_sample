@@ -123,4 +123,13 @@ describe CreditCardChecker do
       ccc.should_not be_valid
     end
   end
+
+  describe 'output should be in the format "TYPE: NUMBERS (VALIDITY)"' do
+    it 'should output "VISA: 4111111111111111       (valid)" for "4111111111111111"' do
+      ccc = CreditCardChecker.new '4111111111111111'
+      ccc.stub(:type).and_return('VISA')
+      ccc.stub(:validated_with_luhn).and_return(true)
+      ccc.to_s.should eql 'VISA: 4111111111111111       (valid)'
+    end
+  end
 end
