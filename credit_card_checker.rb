@@ -1,6 +1,7 @@
 class CreditCardChecker
+  attr_accessor :card
   def initialize(card)
-    @card = card
+    @card = card.gsub(/\s+/, "")
   end
     
   def type
